@@ -2491,10 +2491,10 @@ void ZepMode::AddNavigationKeyMaps(bool allowInVisualMode)
     keymap_add(navigationMaps, { "<C-h>" }, id_MotionLeftSplit);
 
     // Arrows always navigate in insert mode
-    keymap_add({ &m_insertMap }, { "<Down>" }, id_MotionDown);
-    keymap_add({ &m_insertMap }, { "<Up>" }, id_MotionUp);
-    keymap_add({ &m_insertMap }, { "<Right>" }, id_MotionRight);
-    keymap_add({ &m_insertMap }, { "<Left>" }, id_MotionLeft);
+    keymap_add({ &m_insertMap }, { "<Down>" }, id_MotionStandardDown);
+    keymap_add({ &m_insertMap }, { "<Up>" }, id_MotionStandardUp);
+    keymap_add({ &m_insertMap }, { "<Right>" }, id_MotionStandardRight);
+    keymap_add({ &m_insertMap }, { "<Left>" }, id_MotionStandardLeft);
 }
 
 void ZepMode::AddSearchKeyMaps()
