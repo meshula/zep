@@ -59,27 +59,27 @@ if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /MP")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
 
-    LIST(APPEND PLATFORM_LINKLIBS
-        opengl32.lib
-        winmm.lib   # SDL - sound, etc.
-        version.lib # SDL - windows keyboard
-        imm32.lib   # SDL - windows keyboard
-    )
+#    LIST(APPEND PLATFORM_LINKLIBS
+#        opengl32.lib
+#        winmm.lib   # SDL - sound, etc.
+#        version.lib # SDL - windows keyboard
+#        imm32.lib   # SDL - windows keyboard
+#    )
 endif()
 
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
     message(STATUS "TARGET_MAC")
     
-    find_package(Threads REQUIRED)
-    find_package(BZip2 REQUIRED)
-    find_package(ZLIB REQUIRED)
+ #   find_package(Threads REQUIRED)
+ #   find_package(BZip2 REQUIRED)
+ #   find_package(ZLIB REQUIRED)
 
-    LIST(APPEND PLATFORM_LINKLIBS
-        ${BZIP2_LIBRARY}
-        ${ZLIB_LIBRARY}
-        dl
-        "-framework CoreFoundation"
-        )
+ #   LIST(APPEND PLATFORM_LINKLIBS
+ #       ${BZIP2_LIBRARY}
+ #       ${ZLIB_LIBRARY}
+ #       dl
+ #       "-framework CoreFoundation"
+ #       )
 
     set(TARGET_MAC 1)
 endif()
@@ -89,11 +89,11 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
     set(THREADS_PREFER_PTHREAD_FLAG TRUE)
     find_package(Threads REQUIRED)
 
-    LIST(APPEND PLATFORM_LINKLIBS
-        dl 
-        Threads::Threads
-        z
-        )
+#    LIST(APPEND PLATFORM_LINKLIBS
+#        dl 
+#        Threads::Threads
+#        z
+#        )
 
     message(STATUS "TARGET_LINUX")
     set(TARGET_LINUX 1)

@@ -13,7 +13,7 @@ option(ZEP_FEATURE_CPP_FILE_SYSTEM "Default File system enabled" ON)
 # Global Settings
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS "-lGLEW")
+#set(CMAKE_CXX_FLAGS "-lGLEW")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
@@ -24,10 +24,10 @@ set(CMAKE_DEBUG_POSTFIX "-debug")
 set(CMAKE_RELWITHDEBINFO_POSTFIX "-reldbg")
 
 if (BUILD_DEMOS OR BUILD_EXTENSIONS)
-if (WIN32)
-set(VCPKG_TARGET_TRIPLET x64-windows-static-md)
-endif()
-set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/../vcpkg/scripts/buildsystems/vcpkg.cmake CACHE STRING "Vcpkg toolchain file")
+    if (WIN32)
+        set(VCPKG_TARGET_TRIPLET x64-windows-static-md)
+    endif()
+    set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/../vcpkg/scripts/buildsystems/vcpkg.cmake CACHE STRING "Vcpkg toolchain file")
 endif()
 
 project(Zep
@@ -39,11 +39,11 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
 # Can I remove these now?
 if (ZEP_FEATURE_CPP_FILE_SYSTEM)
-add_definitions(-DZEP_FEATURE_CPP_FILE_SYSTEM)
+    add_definitions(-DZEP_FEATURE_CPP_FILE_SYSTEM)
 endif()
 
 if (BUILD_DEMOS)
-SET(BUILD_EXTENSIONS ON)
+    SET(BUILD_EXTENSIONS ON)
 endif()
 
 # config_app.h checks
@@ -66,9 +66,13 @@ enable_testing()
 
 # The main library
 add_subdirectory(src)
-add_subdirectory(extensions)
+if (BUILD_EXTENSIONS)
+    add_subdirectory(extensions)
+endif()
 add_subdirectory(tests)
-add_subdirectory(demos)
+if (BUILD_DEMOS)
+    add_subdirectory(demos)
+endif()
 
 # Make the CMake bits that ensure find_package does the right thing
 install(EXPORT zep-targets
