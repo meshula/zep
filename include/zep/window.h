@@ -5,7 +5,6 @@
 #include <unordered_map>
 
 #include "buffer.h"
-#include "zep/mcommon/utf8/unchecked.h"
 
 namespace Zep
 {
@@ -73,12 +72,6 @@ enum class CursorType
     Insert,
     Visual,
     LineMarker
-};
-
-enum class DisplayMode
-{
-    Normal,
-    Vim
 };
 
 namespace WindowFlags
@@ -247,9 +240,10 @@ private:
     // Cursor
     GlyphIterator m_bufferCursor;                   // Location in buffer coordinates.  Each window has a different buffer cursor
     long m_lastCursorColumn = 0;                    // The last cursor column (could be removed and recalculated)
+    NVec2f m_mousePos;                              // Current mouse location
+    GlyphIterator m_mouseIterator;                  // Current iterator for the mouse cursor
 
     // Visual stuff
-    DisplayMode m_displayMode = DisplayMode::Vim;
     std::vector<std::string> m_statusLines; // Status information, shown under the buffer
 
     // Setup of displayed lines

@@ -75,8 +75,8 @@ NVec2f ZepFont::GetCharSize(const uint8_t* pCh)
     return sz;
 }
 
-ZepDisplay::ZepDisplay(const NVec2f& pixelScale)
-    : m_pixelScale(pixelScale)
+ZepDisplay::ZepDisplay()
+    : m_pixelScale(Zep::NVec2f(1.0f))
 {
     for (size_t i = 0; i < m_fonts.size(); i++)
     {
@@ -123,6 +123,15 @@ const NVec2f& ZepDisplay::GetPixelScale() const
     return m_pixelScale;
 }
 
+void ZepDisplay::SetPixelScale(const NVec2f& scale)
+{
+    m_pixelScale = scale;
+    for (size_t i = 0; i < m_fonts.size(); i++)
+    {
+        m_fonts[i] = nullptr;
+    }
+}
+
 void ZepDisplay::Bigger()
 {
     for (int i = 0; i < (int)m_fonts.size(); i++)
@@ -160,7 +169,7 @@ void ZepDisplay::Smaller()
             case ZepTextType::Heading3:
             {
                 auto& textFont = GetFont(ZepTextType(i));
-                textFont.SetPixelHeight((int)std::max(4.0f, (float)floor(textFont.GetPixelHeight() *.95f)));
+                textFont.SetPixelHeight((int)std::max(4.0f, (float)floor(textFont.GetPixelHeight() / 1.05)));
             }
             default:
             break;

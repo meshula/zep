@@ -1,7 +1,7 @@
 #pragma once
 #include "../display.h"
 #include "../syntax.h"
-#include <imgui/imgui.h>
+#include <imgui.h>
 #include <string>
 
 // Can't include this publicly
@@ -66,8 +66,8 @@ private:
 class ZepDisplay_ImGui : public ZepDisplay
 {
 public:
-    ZepDisplay_ImGui(const NVec2f& pixelScale)
-        : ZepDisplay(pixelScale)
+    ZepDisplay_ImGui()
+        : ZepDisplay()
     {
     }
 
